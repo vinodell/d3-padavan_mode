@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { scaleLinear, scaleTime } from 'd3-scale'
 import {
-  min, max, select, axisLeft, axisBottom, curveCardinal, line
+  min, max, select, axisLeft, axisBottom, curveCatmullRomOpen, line
 } from 'd3'
 
 import data from '../../data.json'
@@ -46,7 +46,7 @@ const drawLine = ({ width, height }) => {
     .call(Xaxis)
 
   const chartLine = line()
-    .curve(curveCardinal)
+    .curve(curveCatmullRomOpen)
     .x((d) => scaleX(d.year))
     .y((d) => scaleY(d.value))
 
