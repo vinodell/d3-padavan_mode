@@ -3,6 +3,8 @@ import http from 'http'
 import cookieParser from 'cookie-parser'
 import io from 'socket.io'
 import regeneratorRuntime from 'regenerator-runtime'
+import csv2json from 'csv2json'
+import fs from 'fs'
 
 import config from './config'
 import mongooseService from './services/mongoose'
@@ -26,6 +28,21 @@ middleware.forEach((it) => server.use(it))
 
 server.get('/', (req, res) => {
   res.send('Express Server')
+})
+
+server.get('/api/v1/graph', async (req, res) => {
+  await fs
+    .createReadStream(`${__dirname}/data/mydata.csv`)
+    .pipe(
+      csv2json({
+        year: Number,
+        level_1: String,
+        level_2: String,
+        value: Number,
+      })
+    )
+    .pipe(fs.createWriteStream('data.json'))
+  res.json({ result: 'ok' })
 })
 
 if (config.mongoStatus) {
