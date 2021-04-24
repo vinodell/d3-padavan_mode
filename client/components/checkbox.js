@@ -1,64 +1,38 @@
-import React, { useState } from 'react'
+import React from 'react'
 
 import info from '../../data.json'
+import CheckBoxChoices from './checkbox_reducer'
 
 const getLevel1Info = info.reduce((acc, rec) => {
   return [...acc, rec.level_1]
 }, [])
-const [...checkBoxInfo] = new Set(getLevel1Info)
+const [...checkBoxData] = new Set(getLevel1Info) // выбираем и фильтруем от дубликатов все поля level_1 для чекбоксов (получаем массив строк этих полей)
 
 const data = info.reduce((acc, rec) => {
   return [...acc, { [rec.level_1]: false }]
 }, [])
 
-const initialState = {
-  ...data
-}
+// const initialState = {
+//   ...data
+// }
 
-console.log(initialState)
+console.log(checkBoxData, data)
 
 const Checkbox = () => {
-  // const [store, dispatch] = useReducer(reducerFunc, initialState)
-  const [isChecked, setChecked] = useState(true)
-  const onChange = (e) => {
-    setChecked(e.target.checked)
-  }
+  // const [isChecked, setChecked] = useState(true)
+  // const onChange = (e) => {
+  //   setChecked(e.target.checked)
+  // }
 
   return (
     <div>
       <legend>Choose your data for graph</legend>
-      {checkBoxInfo.map((it, index) => {
-        return (
-          <div key={index}>
-            {it}
-            <input type="checkbox" id={index} checked={isChecked} onChange={onChange} />
-          </div>
-        )
-      })}
+      <CheckBoxChoices />
     </div>
   )
 }
 
 export default Checkbox
-
-// level_1
-// Total Citizen
-// Total Male Citizens
-// Total Female Citizens
-// Total Male Citizens
-// Total Female Citizens
-// Total Malays
-// Total Male Malays
-// Total Female Malays
-// Total Chinese
-// Total Male Chinese
-// Total Female Chinese
-// Total Indians
-// Total Male Indians
-// Total Female Indians
-// Other Ethnic Groups (Total)
-// Other Ethnic Groups (Males)
-// Other Ethnic Groups (Females)
 
 // level_2
 // 0  -  4 Years

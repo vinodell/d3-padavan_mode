@@ -43,7 +43,7 @@ const drawLine = ({ width, height }) => {
   (Xax.empty() ? getNewAxis('x-axis') : Xax)
     .transition()
     .attr('transform', `translate(${0}, ${height - Y_MARGIN})`)
-    .call(Xaxis)
+    .call(Xaxis);
 
   const chartLine = line()
     .curve(curveCatmullRomOpen)
