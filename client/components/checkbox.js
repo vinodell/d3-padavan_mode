@@ -25,8 +25,9 @@ const Checkbox = () => {
 
   return (
     <div>
-      <legend>Choose your data for graph</legend>
+      <legend>Choose your data for graph:</legend>
       <CheckBoxChoices />
+      {/* <CheckBoxLevel2 /> */}
     </div>
   )
 }

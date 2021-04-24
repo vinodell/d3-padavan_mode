@@ -38,7 +38,8 @@ const CheckboxPanel = () => {
   return (
     <div>
       {checkBoxData.map((it, index) => {
-        console.log(it)
+        // поменять переменную на state из редьюсера
+        console.log('here is map part of the code', it, state.it)
         return (
           <div key={index}>
             {it}
@@ -47,12 +48,15 @@ const CheckboxPanel = () => {
         )
       })}
       <div>
-        <button type="button" onClick={onClick}>
+        <button
+          className="flex-grow w-40 h-16 bg-gray-300 text-m border-solid border-2 border-gray-600 rounded-sm"
+          type="button"
+          onClick={onClick}
+        >
           {toggle ? 'select all' : 'deselecet all'}
         </button>
       </div>
     </div>
   )
 }
-
 export default CheckboxPanel
