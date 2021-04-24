@@ -1,22 +1,21 @@
 import React from 'react'
 
-import info from '../../data.json'
-import CheckBoxChoices from './checkbox_reducer'
+import CheckBoxChoices from './checkbox_choice'
 
-const getLevel1Info = info.reduce((acc, rec) => {
-  return [...acc, rec.level_1]
-}, [])
-const [...checkBoxData] = new Set(getLevel1Info) // выбираем и фильтруем от дубликатов все поля level_1 для чекбоксов (получаем массив строк этих полей)
+// const getLevel1Info = info.reduce((acc, rec) => {
+//   return [...acc, rec.level_1]
+// }, [])
+// const [...checkBoxData] = new Set(getLevel1Info) // выбираем и фильтруем от дубликатов все поля level_1 для чекбоксов (получаем массив строк этих полей)
 
-const data = info.reduce((acc, rec) => {
-  return [...acc, { [rec.level_1]: false }]
-}, [])
+// const data = info.reduce((acc, rec) => {
+//   return [...acc, { [rec.level_1]: false }]
+// }, [])
 
-// const initialState = {
-//   ...data
-// }
+// // const initialState = {
+// //   ...data
+// // }
 
-console.log(checkBoxData, data)
+// console.log(checkBoxData, data)
 
 const Checkbox = () => {
   // const [isChecked, setChecked] = useState(true)
