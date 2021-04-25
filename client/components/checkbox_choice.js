@@ -37,13 +37,12 @@ const CheckboxPanel = () => {
   }, [handleChange, state, onClick])
   return (
     <div>
-      {checkBoxData.map((it, index) => {
-        // поменять переменную на state из редьюсера
-        console.log('here is map part of the code', it, state.it)
+      {Object.keys(state).map((it, index) => {
+        console.log('here is map part of the code', it, state[it])
         return (
           <div key={index}>
             {it}
-            <input type="checkbox" checked={state.it} onChange={(e) => handleChange(it)(e)} />
+            <input type="checkbox" checked={state[it]} onChange={(e) => handleChange(it)(e)} />
           </div>
         )
       })}
