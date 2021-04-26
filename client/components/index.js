@@ -1,13 +1,13 @@
 import React from 'react'
 
 import Graph from './graph'
-import Checkbox from './checkbox'
+import CheckboxPanel from './checkbox_choice'
 
 const Index = () => {
   return (
     <div>
       <Graph />
-      <Checkbox />
+      <CheckboxPanel />
     </div>
   )
 }

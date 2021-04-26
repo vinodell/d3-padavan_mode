@@ -7,7 +7,7 @@ const SWITCH_FLAG = 'SWITCH_FLAG'
 const SWITCH_ALL = 'SWITCH_ALL'
 
 const getLevel1Info = info.reduce((acc, rec) => {
-  return [...acc, rec.level_1]
+  return [...acc, rec.level_1, rec.level_2]
 }, []) // отбираем поле level_1 для чекбоксов
 const [...checkBoxData] = new Set(getLevel1Info) // убираем дуликаты
 const checkBoxChoices = checkBoxData.reduce((acc, rec) => {
@@ -36,11 +36,11 @@ const CheckboxPanel = () => {
     console.log('this is inintialState', state)
   }, [handleChange, state, onClick])
   return (
-    <div>
+    <div className="flex flex-wrap">
       {Object.keys(state).map((it, index) => {
         console.log('here is map part of the code', it, state[it])
         return (
-          <div key={index}>
+          <div className="w-20 h-24 text-sm border-2" key={index}>
             {it}
             <input type="checkbox" checked={state[it]} onChange={(e) => handleChange(it)(e)} />
           </div>
@@ -48,7 +48,7 @@ const CheckboxPanel = () => {
       })}
       <div>
         <button
-          className="flex-grow w-40 h-16 bg-gray-300 text-m border-solid border-2 border-gray-600 rounded-sm"
+          className="w-40 h-16 bg-gray-300 text-m border-solid border-2 border-gray-600 rounded-lg border-l-8"
           type="button"
           onClick={onClick}
         >
