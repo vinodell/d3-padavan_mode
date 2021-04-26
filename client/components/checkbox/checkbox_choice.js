@@ -1,6 +1,6 @@
 import React, { useState, useReducer, useEffect } from 'react'
 
-import info from '../../data.json'
+import info from '../../../data.json'
 import reducerFunc from './reducer'
 
 const SWITCH_FLAG = 'SWITCH_FLAG'
@@ -8,10 +8,10 @@ const SWITCH_ALL = 'SWITCH_ALL'
 
 const getLevel1Info = info.reduce((acc, rec) => {
   return [...acc, rec.level_1, rec.level_2]
-}, []) // отбираем поле level_1 для чекбоксов
+}, []) // отбираем поле level_1 и lexel_2 для чекбоксов
 const [...checkBoxData] = new Set(getLevel1Info) // убираем дуликаты
 const checkBoxChoices = checkBoxData.reduce((acc, rec) => {
-  return { ...acc, [rec]: false } // создаем объект level_1: boolean для чекбоксов
+  return { ...acc, [rec]: false } // создаем объект level_1/2: boolean для чекбоксов
 }, {})
 
 const CheckboxPanel = () => {

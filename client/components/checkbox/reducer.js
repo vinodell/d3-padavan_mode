@@ -1,4 +1,4 @@
-import info from '../../data.json'
+import info from '../../../data.json'
 
 const SWITCH_FLAG = 'SWITCH_FLAG'
 const SWITCH_ALL = 'SWITCH_ALL'
