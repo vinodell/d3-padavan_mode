@@ -1,7 +1,7 @@
 import React from 'react'
 
 import Graph from './graph'
-import CheckboxPanel from './checkbox/checkbox_choice'
+import CheckboxPanel from './checkbox_choice'
 
 const Index = () => {
   return (
