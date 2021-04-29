@@ -8,8 +8,10 @@ const Index = () => {
   return (
     <div>
       <Graph />
-      <CheckboxAge />
-      <CheckboxEtnos />
+      <div className="flex flex-col">
+        <CheckboxAge />
+        <CheckboxEtnos />
+      </div>
     </div>
   )
 }

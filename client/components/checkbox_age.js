@@ -25,7 +25,7 @@ const CheckboxPanel = () => {
     console.log('this is inintialState', checkBoxChoicesAge)
   }, [onClick, handleChange, checkBoxChoicesAge])
   return (
-    <div className="flex flex-wrap">
+    <div className="flex flex-row">
       {Object.keys(checkBoxChoicesAge).map((it, index) => {
         // console.log('here is map part of the code', checkBoxChoicesAge[it])
         return (
