@@ -31,12 +31,12 @@ export default (state = initialState, action) => {
   }
 }
 
-export function switchFlag(checkBoxItem) {
-  console.log('this is redux SWITCH_FLAG item', checkBoxItem)
+export function switchFlag({ payload }) {
+  console.log('this is redux SWITCH_FLAG item', payload)
   return (dispatch) => {
     dispatch({
       type: SWITCH_FLAG,
-      payload: checkBoxItem
+      payload
     })
   }
 }
