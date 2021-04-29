@@ -1,37 +1,37 @@
 import React, { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 
-import { switchFlag, switchAllFlags } from '../redux/reducers/graphic'
+import { switchAgeFlag, switchAllAgeFlags } from '../redux/reducers/graphic_age'
 
 const CheckboxPanel = () => {
   const dispatch = useDispatch()
-  const { ...checkBoxChoices } = useSelector((s) => s.graphic)
-  console.log('THIS IS FIRST TIME checkBoxChoices is here', checkBoxChoices)
+  const { ...checkBoxChoicesAge } = useSelector((s) => s.graphic_age)
+  console.log('THIS IS FIRST TIME checkBoxChoicesAge is here', checkBoxChoicesAge)
   const [toggle, isToggled] = useState(false)
   const onClick = () => {
     isToggled(!toggle)
-    dispatch(switchAllFlags(toggle))
+    dispatch(switchAllAgeFlags(toggle))
   }
   const handleChange = (checboxInfo) => (e) => {
     console.log('here is handleChange it', checboxInfo)
     dispatch(
-      switchFlag({
+      switchAgeFlag({
         value: e.target.value,
         payload: checboxInfo
       })
     )
   }
   useEffect(() => {
-    console.log('this is inintialState', checkBoxChoices)
-  }, [onClick, handleChange, checkBoxChoices])
+    console.log('this is inintialState', checkBoxChoicesAge)
+  }, [onClick, handleChange, checkBoxChoicesAge])
   return (
     <div className="flex flex-wrap">
-      {Object.keys(checkBoxChoices).map((it, index) => {
-        // console.log('here is map part of the code', checkBoxChoices[it])
+      {Object.keys(checkBoxChoicesAge).map((it, index) => {
+        // console.log('here is map part of the code', checkBoxChoicesAge[it])
         return (
           <div className="w-20 h-24 text-sm border-2" key={index}>
             {it}
-            <input type="checkbox" checked={checkBoxChoices[it]} onChange={handleChange(it)} />
+            <input type="checkbox" checked={checkBoxChoicesAge[it]} onChange={handleChange(it)} />
           </div>
         )
       })}

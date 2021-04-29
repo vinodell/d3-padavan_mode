@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+// import { useSelector } from 'react-redux'
 import { scaleLinear, scaleTime } from 'd3-scale'
 import {
   min, max, select, axisLeft, axisBottom, curveCatmullRomOpen, line
@@ -61,6 +62,7 @@ const drawLine = ({ width, height }) => {
 }
 
 const Graph = () => {
+  // const { ...checkBoxChoices } = useSelector((s) => s.graphic)
   const [width] = useState(DEFAULT_WIDTH)
   const [height] = useState(DEFAULT_HEIGHT)
 

@@ -1,13 +1,15 @@
 import React from 'react'
 
 import Graph from './graph'
-import CheckboxPanel from './checkbox_choice'
+import CheckboxEtnos from './checkbox_choice'
+import CheckboxAge from './checkbox_age'
 
 const Index = () => {
   return (
     <div>
       <Graph />
-      <CheckboxPanel />
+      <CheckboxAge />
+      <CheckboxEtnos />
     </div>
   )
 }
