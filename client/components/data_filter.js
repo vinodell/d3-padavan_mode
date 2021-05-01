@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux'
 
 import info from '../../data.json'
 
-export default function useFilterData() {
+const useFilterData = () => {
   const { ...checkBoxChoices } = useSelector((s) => s.graphic)
   const { ...checkBoxChoicesAge } = useSelector((s) => s.graphic_age)
 
@@ -17,7 +17,7 @@ export default function useFilterData() {
     return { ...acc }
   }, {})
 
-  function Calculate(data, etnos, age) {
+  const Calculate = (data, etnos, age) => {
     let result = []
     let finalArr = []
     const etnosArr = Object.keys(etnos)
@@ -43,4 +43,7 @@ export default function useFilterData() {
     return Calculate(info, checkboxEtnos, checkBoxAge)
   }, [checkboxEtnos, checkBoxAge])
   console.log('THIS IS useHook RESULT__________', finalResult)
+  return finalResult
 }
+
+export default useFilterData

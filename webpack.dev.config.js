@@ -19,7 +19,7 @@ const config = {
     //  publicPath пустая переменная
   },
   devServer: {
-    hot: true,
+    hot: false,
     open: true,
     contentBase: resolve(__dirname, 'dist'),
     port: 8081, // client port

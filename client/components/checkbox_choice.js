@@ -27,7 +27,7 @@ const CheckboxPanel = () => {
   return (
     <div className="flex flex-row">
       {Object.keys(checkBoxChoices).map((it, index) => {
-        console.log('here is map part of the code checkBoxChoices', checkBoxChoices)
+        // console.log('here is map part of the code checkBoxChoices', checkBoxChoices)
         return (
           <div className="w-20 h-24 text-sm border-2" key={index}>
             {it}

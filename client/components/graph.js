@@ -62,8 +62,8 @@ const drawLine = ({ width, height }) => {
 }
 
 const Graph = () => {
-  const res = useFilterData()
-  console.log('THIS IS _________ res from useFilter', res)
+  const finalResult = useFilterData()
+  console.log('THIS IS _________ res from useFilter in GRAPH.js', finalResult)
   const [width] = useState(DEFAULT_WIDTH)
   const [height] = useState(DEFAULT_HEIGHT)
   useEffect(() => {
