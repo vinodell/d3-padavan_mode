@@ -7,7 +7,7 @@ const getLevel1Info = info.reduce((acc, rec) => {
   return [...acc, rec.level_1]
 }, [])
 const [...checkBoxLevel1] = new Set(getLevel1Info) // убираем дуликаты
-console.log('this is redux CheckBoxLevel_2 creation', checkBoxLevel1)
+// console.log('this is redux CheckBoxLevel_2 creation', checkBoxLevel1)
 const checkBoxChoices = checkBoxLevel1.reduce((acc, rec) => {
   return { ...acc, [rec]: false } // создаем объект level_1/2: boolean для чекбоксов
 }, {})
@@ -33,7 +33,7 @@ export default (state = initialState, action) => {
 }
 
 export function switchFlag({ payload }) {
-  console.log('this is redux SWITCH_FLAG item', payload)
+  // console.log('this is redux SWITCH_FLAG item', payload)
   return (dispatch) => {
     dispatch({
       type: SWITCH_FLAG,
@@ -43,7 +43,7 @@ export function switchFlag({ payload }) {
 }
 
 export function switchAllFlags(toggle) {
-  console.log('Here comes the fuckong toggle', toggle)
+  // console.log('Here comes the fuckong toggle', toggle)
   return (dispatch) => {
     dispatch({
       type: SWITCH_ALL,

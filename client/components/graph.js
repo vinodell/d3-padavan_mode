@@ -6,6 +6,7 @@ import {
 } from 'd3'
 
 import data from '../../data.json'
+import useFilterData from './data_filter'
 
 const DEFAULT_HEIGHT = 400
 const DEFAULT_WIDTH = 1000
@@ -40,11 +41,10 @@ const drawLine = ({ width, height }) => {
     .transition()
     .attr('transform', `translate(${2 * X_MARGIN}, ${Y_MARGIN})`)
     .call(Yaxis);
-
   (Xax.empty() ? getNewAxis('x-axis') : Xax)
     .transition()
     .attr('transform', `translate(${0}, ${height - Y_MARGIN})`)
-    .call(Xaxis);
+    .call(Xaxis)
 
   const chartLine = line()
     .curve(curveCatmullRomOpen)
@@ -62,10 +62,10 @@ const drawLine = ({ width, height }) => {
 }
 
 const Graph = () => {
-  // const { ...checkBoxChoices } = useSelector((s) => s.graphic)
+  const res = useFilterData()
+  console.log('THIS IS _________ res from useFilter', res)
   const [width] = useState(DEFAULT_WIDTH)
   const [height] = useState(DEFAULT_HEIGHT)
-
   useEffect(() => {
     drawLine({ width, height })
   }, [width, height])

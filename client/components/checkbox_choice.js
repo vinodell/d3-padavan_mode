@@ -6,14 +6,14 @@ import { switchFlag, switchAllFlags } from '../redux/reducers/graphic'
 const CheckboxPanel = () => {
   const dispatch = useDispatch()
   const { ...checkBoxChoices } = useSelector((s) => s.graphic)
-  console.log('THIS IS FIRST TIME checkBoxChoices is here', checkBoxChoices)
+  // console.log('THIS IS FIRST TIME checkBoxChoices is here', checkBoxChoices)
   const [toggle, isToggled] = useState(false)
   const onClick = () => {
     isToggled(!toggle)
     dispatch(switchAllFlags(toggle))
   }
   const handleChange = (checboxInfo) => (e) => {
-    console.log('here is handleChange it', checboxInfo)
+    // console.log('here is handleChange it', checboxInfo)
     dispatch(
       switchFlag({
         value: e.target.value,
@@ -27,7 +27,7 @@ const CheckboxPanel = () => {
   return (
     <div className="flex flex-row">
       {Object.keys(checkBoxChoices).map((it, index) => {
-        // console.log('here is map part of the code', checkBoxChoices[it])
+        console.log('here is map part of the code checkBoxChoices', checkBoxChoices)
         return (
           <div className="w-20 h-24 text-sm border-2" key={index}>
             {it}

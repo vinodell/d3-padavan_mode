@@ -6,14 +6,14 @@ import { switchAgeFlag, switchAllAgeFlags } from '../redux/reducers/graphic_age'
 const CheckboxPanel = () => {
   const dispatch = useDispatch()
   const { ...checkBoxChoicesAge } = useSelector((s) => s.graphic_age)
-  console.log('THIS IS FIRST TIME checkBoxChoicesAge is here', checkBoxChoicesAge)
+  // console.log('THIS IS FIRST TIME checkBoxChoicesAge is here', checkBoxChoicesAge)
   const [toggle, isToggled] = useState(false)
   const onClick = () => {
     isToggled(!toggle)
     dispatch(switchAllAgeFlags(toggle))
   }
   const handleChange = (checboxInfo) => (e) => {
-    console.log('here is handleChange it', checboxInfo)
+    // console.log('here is handleChange it', checboxInfo)
     dispatch(
       switchAgeFlag({
         value: e.target.value,

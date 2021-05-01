@@ -7,7 +7,7 @@ const getLevel2Info = info.reduce((acc, rec) => {
   return [...acc, rec.level_2]
 }, []) // отбираем поле level_1 и lexel_2 для чекбоксов
 const [...checkBoxLevel2] = new Set(getLevel2Info)
-console.log('this is redux CheckBoxLevel_2 creation', checkBoxLevel2)
+// console.log('this is redux CheckBoxLevel_2 creation', checkBoxLevel2)
 const checkBoxChoicesAge = checkBoxLevel2.reduce((acc, rec) => {
   return { ...acc, [rec]: false } // создаем объект level_1/2: boolean для чекбоксов
 }, {})
@@ -33,7 +33,7 @@ export default (state = initialState, action) => {
 }
 
 export function switchAgeFlag({ payload }) {
-  console.log('this is redux SWITCH_AGE_FLAG item', payload)
+  // console.log('this is redux SWITCH_AGE_FLAG item', payload)
   return (dispatch) => {
     dispatch({
       type: SWITCH_AGE_FLAG,
@@ -43,7 +43,7 @@ export function switchAgeFlag({ payload }) {
 }
 
 export function switchAllAgeFlags(toggle) {
-  console.log('Here comes the fuckong toggle', toggle)
+  // console.log('Here comes the fuckong toggle', toggle)
   return (dispatch) => {
     dispatch({
       type: SWITCH_AGE_ALL,
