@@ -1,7 +1,16 @@
 import { useMemo } from 'react'
 import { useSelector } from 'react-redux'
 
-import info from '../../data.json'
+import csvdata from '../../data.json'
+
+const info = csvdata
+  .map((it) => ({
+    level_1: it.level_1,
+    level_2: it.level_2,
+    value: +it.value,
+    year: +it.year
+  }))
+  .filter((it) => !Number.isNaN(it.value))
 
 const useFilterData = () => {
   const { ...checkBoxChoices } = useSelector((s) => s.graphic)
@@ -37,7 +46,21 @@ const useFilterData = () => {
         }
       }
     }
-    return finalArr
+    let dataForGraph = []
+    dataForGraph = finalArr.reduce((acc, rec) => {
+      return {
+        ...acc,
+        [rec.level_1]: acc[rec.level_1]
+          ? {
+            ...acc[rec.level_1],
+            [rec.level_2]: acc[rec.level_1][rec.level_2]
+              ? [...acc[rec.level_1][rec.level_2], rec]
+              : [rec]
+          }
+          : { [rec.level_2]: [rec] }
+      }
+    }, [])
+    return dataForGraph
   }
   const finalResult = useMemo(() => {
     return Calculate(info, checkboxEtnos, checkBoxAge)

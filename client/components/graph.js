@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react'
-// import { useSelector } from 'react-redux'
 import { scaleLinear, scaleTime } from 'd3-scale'
 import {
   min, max, select, axisLeft, axisBottom, curveCatmullRomOpen, line
@@ -62,8 +61,8 @@ const drawLine = ({ width, height }) => {
 }
 
 const Graph = () => {
-  const finalResult = useFilterData()
-  console.log('THIS IS _________ res from useFilter in GRAPH.js', finalResult)
+  const dataForGraph = useFilterData()
+  console.log('THIS IS _________ res from useFilter in GRAPH.js', dataForGraph)
   const [width] = useState(DEFAULT_WIDTH)
   const [height] = useState(DEFAULT_HEIGHT)
   useEffect(() => {
