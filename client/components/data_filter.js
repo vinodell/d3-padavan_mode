@@ -3,12 +3,21 @@ import { useSelector } from 'react-redux'
 
 import csvdata from '../../data.json'
 
+const randomColor = () => {
+  const r = Math.floor(Math.random() * 256)
+  const g = Math.floor(Math.random() * 256)
+  const b = Math.floor(Math.random() * 256)
+  const colour = `#${r.toString(16)}${g.toString(16)}${b.toString(16)}`
+  return colour
+}
+
 const info = csvdata
   .map((it) => ({
     level_1: it.level_1,
     level_2: it.level_2,
     value: +it.value,
-    year: +it.year
+    year: +it.year,
+    colour: randomColor()
   }))
   .filter((it) => !Number.isNaN(it.value))
 
