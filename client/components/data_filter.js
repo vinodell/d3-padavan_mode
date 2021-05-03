@@ -69,7 +69,11 @@ const useFilterData = () => {
           : { [rec.level_2]: [rec] }
       }
     }, [])
-    return dataForGraph
+    const sortedDataForGraph = Object.values(dataForGraph)
+      .map((it) => Object.values(it))
+      .flat()
+      // .map((it) => it.map((it) => it.value))
+    return sortedDataForGraph
   }
   const finalResult = useMemo(() => {
     return Calculate(info, checkboxEtnos, checkBoxAge)

@@ -61,12 +61,12 @@ const drawLine = ({ width, height }) => {
 }
 
 const Graph = () => {
-  const dataForGraph = useFilterData()
-  console.log('THIS IS _________ res from useFilter in GRAPH.js', dataForGraph)
+  const dataForChart = useFilterData()
+  console.log('THIS IS _________ res from useFilter in GRAPH.js', dataForChart)
   const [width] = useState(DEFAULT_WIDTH)
   const [height] = useState(DEFAULT_HEIGHT)
   useEffect(() => {
-    drawLine({ width, height })
+    drawLine({ width, height, dataForChart })
   }, [width, height])
   return (
     <div>
