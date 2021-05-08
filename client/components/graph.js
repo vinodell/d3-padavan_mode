@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { scaleLinear, scaleTime } from 'd3-scale'
+import { schemeSet3 } from 'd3-scale-chromatic'
 // eslint-disable-next-line
 import { min, max, select, axisLeft, axisBottom, curveCatmullRomOpen, line } from 'd3'
 
@@ -18,7 +19,9 @@ const Y_MARGIN = 40
 //   }))
 // console.log(info)
 
-const drawLine = ({ width, height, texas }) => {
+// eslint-disable-next-line
+const drawLine = ({ width, height, texas, dataForChart }) => {
+  const color = schemeSet3
   console.log('this is texas___DDDDD', texas)
   const getNewAxis = (cx) => select('#chart').append('g').attr('class', cx)
 
@@ -45,22 +48,22 @@ const drawLine = ({ width, height, texas }) => {
     .attr('transform', `translate(${0}, ${height - Y_MARGIN})`)
     .call(Xaxis)
 
-  // dataForChart.forEach((item) => {
-  //   console.log('this is item from forEach _____+++_____', dataForChart)
-  //   const chartLine = line()
-  //     .curve(curveCatmullRomOpen)
-  //     .x((d) => scaleX(d.year))
-  //     .y((d) => scaleY(d.value))
+  dataForChart.forEach((item, index) => {
+    console.log('this is item from forEach _____+++_____', item, index)
+    const chartLine = line()
+      .curve(curveCatmullRomOpen)
+      .x((d) => scaleX(d.year))
+      .y((d) => scaleY(d.value))
 
-  //   const chartPath = select('.path');
-  //   (chartPath.empty() ? select('#chart').append('path').attr('class', 'path') : chartPath)
-  //     .datum(item)
-  //     .attr('stroke', 'gray')
-  //     .attr('stroke-width', '2')
-  //     .attr('fill', 'none')
-  //     .transition()
-  //     .attr('d', chartLine)
-  // })
+    const chartPath = select('.path');
+    (chartPath.empty() ? select('#chart').append('path').attr('class', 'path') : chartPath)
+      .datum(item)
+      .attr('stroke', color[index])
+      .attr('stroke-width', '2')
+      .attr('fill', 'none')
+      .transition()
+      .attr('d', chartLine)
+  })
 }
 
 const Graph = () => {
@@ -73,8 +76,9 @@ const Graph = () => {
   const [width] = useState(DEFAULT_WIDTH)
   const [height] = useState(DEFAULT_HEIGHT)
   useEffect(() => {
-    drawLine({ width, height, texas })
-  }, [width, height, texas])
+    // eslint-disable-next-line
+    drawLine({ width, height, texas, dataForChart })
+  }, [width, height, texas, dataForChart])
   return (
     <div>
       <div className="min-w-screen min-h-screen bg-gray-900 flex flex-wrap content-around justify-center px-5 py-5">
