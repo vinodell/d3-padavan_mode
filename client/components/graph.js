@@ -1,33 +1,33 @@
 import React, { useState, useEffect } from 'react'
 import { scaleLinear, scaleTime } from 'd3-scale'
-import {
-  min, max, select, axisLeft, axisBottom, curveCatmullRomOpen, line
-} from 'd3'
+// eslint-disable-next-line
+import { min, max, select, axisLeft, axisBottom, curveCatmullRomOpen, line } from 'd3'
 
-import data from '../../data.json'
+// import data from '../../data.json'
 import useFilterData from './data_filter'
 
 const DEFAULT_HEIGHT = 400
 const DEFAULT_WIDTH = 1000
-const X_MARGIN = 20
-const Y_MARGIN = 50
+const X_MARGIN = 30
+const Y_MARGIN = 40
 
-const info = data
-  .map((it) => ({
-    value: +it.value,
-    year: +it.year
-  }))
-  .filter((it) => !Number.isNaN(it.value))
+// const texas = data
+//   .map((it) => ({
+//     value: +it.value,
+//     year: +it.year
+//   }))
+// console.log(info)
 
-const drawLine = ({ width, height }) => {
+const drawLine = ({ width, height, texas }) => {
+  console.log('this is texas___DDDDD', texas)
   const getNewAxis = (cx) => select('#chart').append('g').attr('class', cx)
 
   const scaleX = scaleTime()
-    .domain([min(info.map((it) => it.year)), max(info.map((it) => it.year))])
-    .range([2 * X_MARGIN, width - X_MARGIN * 10])
+    .domain([min(texas.map((it) => it.year)), max(texas.map((it) => it.year))])
+    .range([2 * X_MARGIN, width - X_MARGIN * 7])
 
   const scaleY = scaleLinear()
-    .domain([min(info.map((it) => it.value)), max(info.map((it) => it.value))])
+    .domain([min(texas.map((it) => it.value)), max(texas.map((it) => it.value))])
     .range([height - Y_MARGIN * 2, Y_MARGIN])
 
   const Yax = select('.y-axis')
@@ -45,29 +45,36 @@ const drawLine = ({ width, height }) => {
     .attr('transform', `translate(${0}, ${height - Y_MARGIN})`)
     .call(Xaxis)
 
-  const chartLine = line()
-    .curve(curveCatmullRomOpen)
-    .x((d) => scaleX(d.year))
-    .y((d) => scaleY(d.value))
+  // dataForChart.forEach((item) => {
+  //   console.log('this is item from forEach _____+++_____', dataForChart)
+  //   const chartLine = line()
+  //     .curve(curveCatmullRomOpen)
+  //     .x((d) => scaleX(d.year))
+  //     .y((d) => scaleY(d.value))
 
-  const chartPath = select('.path');
-  (chartPath.empty() ? select('#chart').append('path').attr('class', 'path') : chartPath)
-    .datum(info)
-    .attr('stroke', 'grey')
-    .attr('stroke-width', '2')
-    .attr('fill', 'none')
-    .transition()
-    .attr('d', chartLine)
+  //   const chartPath = select('.path');
+  //   (chartPath.empty() ? select('#chart').append('path').attr('class', 'path') : chartPath)
+  //     .datum(item)
+  //     .attr('stroke', 'gray')
+  //     .attr('stroke-width', '2')
+  //     .attr('fill', 'none')
+  //     .transition()
+  //     .attr('d', chartLine)
+  // })
 }
 
 const Graph = () => {
   const dataForChart = useFilterData()
+  const texas = dataForChart.flat().map((it) => ({
+    year: it.year,
+    value: it.value
+  }))
   console.log('THIS IS _________ res from useFilter in GRAPH.js', dataForChart)
   const [width] = useState(DEFAULT_WIDTH)
   const [height] = useState(DEFAULT_HEIGHT)
   useEffect(() => {
-    drawLine({ width, height, dataForChart })
-  }, [width, height])
+    drawLine({ width, height, texas })
+  }, [width, height, texas])
   return (
     <div>
       <div className="min-w-screen min-h-screen bg-gray-900 flex flex-wrap content-around justify-center px-5 py-5">

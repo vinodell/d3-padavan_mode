@@ -3,13 +3,19 @@ import { useSelector } from 'react-redux'
 
 import csvdata from '../../data.json'
 
-const randomColor = () => {
-  const r = Math.floor(Math.random() * 256)
-  const g = Math.floor(Math.random() * 256)
-  const b = Math.floor(Math.random() * 256)
-  const colour = `#${r.toString(16)}${g.toString(16)}${b.toString(16)}`
-  return colour
-}
+// const randomColor = (arg) => {
+//   let array = {}
+//   if (typeof array[arg] === 'string') {
+//     return array[arg]
+//   }
+//   const r = Math.floor(Math.random() * 256)
+//   const g = Math.floor(Math.random() * 256)
+//   const b = Math.floor(Math.random() * 256)
+//   const colour = `#${r.toString(16)}${g.toString(16)}${b.toString(16)}`
+//   array = { ...array, [arg]: colour }
+//   console.log('this is array of_____COLOUR', array)
+//   return colour
+// }
 
 const info = csvdata
   .map((it) => ({
@@ -17,7 +23,7 @@ const info = csvdata
     level_2: it.level_2,
     value: +it.value,
     year: +it.year,
-    colour: randomColor()
+    // colour: randomColor(it.level_1)
   }))
   .filter((it) => !Number.isNaN(it.value))
 
@@ -72,13 +78,13 @@ const useFilterData = () => {
     const sortedDataForGraph = Object.values(dataForGraph)
       .map((it) => Object.values(it))
       .flat()
-      // .map((it) => it.map((it) => it.value))
+    // .map((it) => it.map((it) => it.value))
     return sortedDataForGraph
   }
   const finalResult = useMemo(() => {
     return Calculate(info, checkboxEtnos, checkBoxAge)
   }, [checkboxEtnos, checkBoxAge])
-  console.log('THIS IS useHook RESULT__________', finalResult)
+  // console.log('THIS IS useHook RESULT__________', finalResult)
   return finalResult
 }
 

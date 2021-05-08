@@ -22,7 +22,7 @@ const CheckboxPanel = () => {
     )
   }
   useEffect(() => {
-    console.log('this is inintialState', checkBoxChoices)
+    // console.log('this is inintialState', checkBoxChoices)
   }, [onClick, handleChange, checkBoxChoices])
   return (
     <div className="flex flex-row">
