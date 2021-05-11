@@ -2,22 +2,14 @@ import React, { useState, useEffect } from 'react'
 import { scaleLinear, scaleTime } from 'd3-scale'
 import { schemeSet3 } from 'd3-scale-chromatic'
 // eslint-disable-next-line
-import { min, max, select, axisLeft, axisBottom, curveCatmullRomOpen, line } from 'd3'
+import { min, max, select, axisLeft, axisBottom, line, curveCardinal } from 'd3'
 
-// import data from '../../data.json'
 import useFilterData from './data_filter'
 
 const DEFAULT_HEIGHT = 400
-const DEFAULT_WIDTH = 1000
+const DEFAULT_WIDTH = 800
 const X_MARGIN = 30
 const Y_MARGIN = 40
-
-// const texas = data
-//   .map((it) => ({
-//     value: +it.value,
-//     year: +it.year
-//   }))
-// console.log(info)
 
 // eslint-disable-next-line
 const drawLine = ({ width, height, texas, dataForChart }) => {
@@ -26,12 +18,15 @@ const drawLine = ({ width, height, texas, dataForChart }) => {
   const getNewAxis = (cx) => select('#chart').append('g').attr('class', cx)
 
   const scaleX = scaleTime()
-    .domain([min(texas.map((it) => it.year)), max(texas.map((it) => it.year))])
-    .range([2 * X_MARGIN, width - X_MARGIN * 7])
+    .domain([
+      new Date(min(texas.map((it) => it.year)), 1, 1),
+      new Date(max(texas.map((it) => it.year)), 1, 1)
+    ])
+    .range([2 * X_MARGIN, width])
 
   const scaleY = scaleLinear()
     .domain([min(texas.map((it) => it.value)), max(texas.map((it) => it.value))])
-    .range([height - Y_MARGIN * 2, Y_MARGIN])
+    .range([height - Y_MARGIN, 0])
 
   const Yax = select('.y-axis')
   const Xax = select('.x-axis')
@@ -41,33 +36,39 @@ const drawLine = ({ width, height, texas, dataForChart }) => {
 
   (Yax.empty() ? getNewAxis('y-axis') : Yax)
     .transition()
-    .attr('transform', `translate(${2 * X_MARGIN}, ${Y_MARGIN})`)
+    .attr('transform', `translate(${scaleX.range()[0]}, ${scaleY.range()[1]})`)
     .call(Yaxis);
   (Xax.empty() ? getNewAxis('x-axis') : Xax)
     .transition()
     .attr('transform', `translate(${0}, ${height - Y_MARGIN})`)
     .call(Xaxis)
 
-  dataForChart.forEach((item, index) => {
-    console.log('this is item from forEach _____+++_____', item, index)
-    const chartLine = line()
-      .curve(curveCatmullRomOpen)
-      .x((d) => scaleX(d.year))
-      .y((d) => scaleY(d.value))
+  // console.log('this is item from forEach _____+++_____', item, index)
+  const chartLine = line()
+    .curve(curveCardinal)
+    .x((d) => scaleX(new Date(d.year, 1, 1)))
+    .y((d) => scaleY(d.value))
 
-    const chartPath = select('.path');
-    (chartPath.empty() ? select('#chart').append('path').attr('class', 'path') : chartPath)
-      .datum(item)
-      .attr('stroke', color[index])
-      .attr('stroke-width', '2')
-      .attr('fill', 'none')
-      .transition()
-      .attr('d', chartLine)
-  })
+  const chartPath = select('#chart').selectAll('.path-go').data(dataForChart)
+
+  chartPath
+    .enter()
+    .append('path')
+    .attr('class', 'path-go')
+    .attr('stroke', (d, index) => color[index])
+    .attr('stroke-width', '2')
+    .attr('fill', 'none')
+    .transition()
+    .attr('d', (d) => {
+      console.log('This is chartPath d _________!!!!!', d)
+      return chartLine(d)
+    })
+
+  chartPath.exit().remove()
 }
 
 const Graph = () => {
-  const dataForChart = useFilterData()
+  const dataForChart = useFilterData().sort((a, b) => a.year - b.year)
   const texas = dataForChart.flat().map((it) => ({
     year: it.year,
     value: it.value
