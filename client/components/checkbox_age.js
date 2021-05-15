@@ -32,9 +32,9 @@ const CheckboxPanel = () => {
   return (
     <div className="flex flex-row">
       {Object.keys(checkBoxChoicesAge).map((it, index) => {
-        console.log('here is map part of the code', it)
+        // console.log('here is map part of the code', it)
         return (
-          <div className="w-20 h-24 text-sm border-2" key={index}>
+          <div className="w-20 h-14 text-sm border-2" key={index}>
             {handleCut(it)}
             <input type="checkbox" checked={checkBoxChoicesAge[it]} onChange={handleChange(it)} />
           </div>

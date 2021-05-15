@@ -43,7 +43,6 @@ const drawLine = ({ width, height, dataForChart, dataFromFilter }) => {
     .attr('transform', `translate(${0}, ${height - Y_MARGIN})`)
     .call(Xaxis)
 
-  // console.log('this is item from forEach _____+++_____', item, index)
   const chartLine = line()
     .curve(curveCardinal)
     .x((d) => scaleX(new Date(d.year, 1, 1)))
@@ -63,6 +62,9 @@ const drawLine = ({ width, height, dataForChart, dataFromFilter }) => {
       console.log('This is chartPath d _________!!!!!', d)
       return chartLine(d)
     })
+  chartPath.attr('d', (d) => {
+    return chartLine(d)
+  })
 
   chartPath.exit().remove()
 }
@@ -83,7 +85,7 @@ const Graph = () => {
   return (
     <div>
       <div className="min-w-screen min-h-screen bg-gray-900 flex flex-wrap content-around justify-center px-5 py-5">
-        <div className="bg-indigo-600 text-white rounded shadow-xl py-5 px-5 w-full lg:w-10/12 xl:w-3/4">
+        <div className="bg-gray-600 text-white rounded shadow-xl py-5 px-5 w-full lg:w-10/12 xl:w-3/4">
           <div className="flex items-end">
             <svg width={width} height={height} id="chart" />
           </div>

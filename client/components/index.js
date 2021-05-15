@@ -9,7 +9,7 @@ const Index = () => {
     <div>
       <Graph />
       <div className="flex flex-col">
-        <div className="bg-gray-300">choose age</div>
+        <div className="bg-gray-300">choose age, (years)</div>
         <CheckboxAge />
         <div className="bg-gray-300">choose etnos</div>
         <CheckboxEtnos />
