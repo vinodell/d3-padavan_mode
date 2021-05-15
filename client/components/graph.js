@@ -12,20 +12,20 @@ const X_MARGIN = 30
 const Y_MARGIN = 40
 
 // eslint-disable-next-line
-const drawLine = ({ width, height, texas, dataForChart }) => {
+const drawLine = ({ width, height, dataForChart, dataFromFilter }) => {
   const color = schemeSet3
-  console.log('this is texas___DDDDD', texas)
+  console.log('this is dataForChart___DDDDD', dataForChart)
   const getNewAxis = (cx) => select('#chart').append('g').attr('class', cx)
 
   const scaleX = scaleTime()
     .domain([
-      new Date(min(texas.map((it) => it.year)), 1, 1),
-      new Date(max(texas.map((it) => it.year)), 1, 1)
+      new Date(min(dataForChart.map((it) => it.year)), 1, 1),
+      new Date(max(dataForChart.map((it) => it.year)), 1, 1)
     ])
     .range([2 * X_MARGIN, width])
 
   const scaleY = scaleLinear()
-    .domain([min(texas.map((it) => it.value)), max(texas.map((it) => it.value))])
+    .domain([min(dataForChart.map((it) => it.value)), max(dataForChart.map((it) => it.value))])
     .range([height - Y_MARGIN, 0])
 
   const Yax = select('.y-axis')
@@ -49,7 +49,7 @@ const drawLine = ({ width, height, texas, dataForChart }) => {
     .x((d) => scaleX(new Date(d.year, 1, 1)))
     .y((d) => scaleY(d.value))
 
-  const chartPath = select('#chart').selectAll('.path-go').data(dataForChart)
+  const chartPath = select('#chart').selectAll('.path-go').data(dataFromFilter)
 
   chartPath
     .enter()
@@ -68,18 +68,18 @@ const drawLine = ({ width, height, texas, dataForChart }) => {
 }
 
 const Graph = () => {
-  const dataForChart = useFilterData().sort((a, b) => a.year - b.year)
-  const texas = dataForChart.flat().map((it) => ({
+  const dataFromFilter = useFilterData().sort((a, b) => a.year - b.year)
+  const dataForChart = dataFromFilter.flat().map((it) => ({
     year: it.year,
     value: it.value
   }))
-  console.log('THIS IS _________ res from useFilter in GRAPH.js', dataForChart)
+  // console.log('THIS IS _________ res from useFilter in GRAPH.js', dataFromFilter)
   const [width] = useState(DEFAULT_WIDTH)
   const [height] = useState(DEFAULT_HEIGHT)
   useEffect(() => {
     // eslint-disable-next-line
-    drawLine({ width, height, texas, dataForChart })
-  }, [width, height, texas, dataForChart])
+    drawLine({ width, height, dataForChart, dataFromFilter })
+  }, [width, height, dataForChart, dataFromFilter])
   return (
     <div>
       <div className="min-w-screen min-h-screen bg-gray-900 flex flex-wrap content-around justify-center px-5 py-5">
