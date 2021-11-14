@@ -29,7 +29,7 @@ const CheckboxPanel = () => {
       {Object.keys(checkBoxChoices).map((it, index) => {
         // console.log('here is map part of the code checkBoxChoices', checkBoxChoices)
         return (
-          <div className="w-20 h-24 text-sm border-2" key={index}>
+          <div className="w-40 h-20 text-sm border-2" key={index}>
             {it}
             <input type="checkbox" checked={checkBoxChoices[it]} onChange={handleChange(it)} />
           </div>

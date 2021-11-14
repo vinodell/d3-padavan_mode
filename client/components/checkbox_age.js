@@ -26,6 +26,7 @@ const CheckboxPanel = () => {
     const result = item.match(re)
     return result.length === 1 ? `${result}+` : result.join('-')
   }
+  // useCallback(() => {}, [onClick, handleChange])
   useEffect(() => {
     // console.log('this is inintialState', checkBoxChoicesAge)
   }, [onClick, handleChange, checkBoxChoicesAge])

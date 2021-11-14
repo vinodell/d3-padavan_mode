@@ -9,9 +9,13 @@ const Index = () => {
     <div>
       <Graph />
       <div className="flex flex-col">
-        <div className="bg-gray-300">choose age, (years)</div>
+        <div className="w-full text-center bg-gray-400 font-mono hover:bg-gray-500">
+          choose age, (years)
+        </div>
         <CheckboxAge />
-        <div className="bg-gray-300">choose etnos</div>
+        <div className="w-full text-center bg-gray-400 font-mono hover:bg-gray-500">
+          choose etnos
+        </div>
         <CheckboxEtnos />
       </div>
     </div>

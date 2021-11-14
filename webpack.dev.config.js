@@ -69,7 +69,8 @@ const config = {
   },
   plugins: [
     new ESlintPlugin({
-      extensions: ['js', 'jsx']
+      extensions: ['js', 'jsx'],
+      exclude: 'node_modules'
     }),
     new MiniCssExtractPlugin({
       filename: 'css/style.css'
